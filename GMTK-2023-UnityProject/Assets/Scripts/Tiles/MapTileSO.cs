@@ -8,7 +8,7 @@ public class MapTileSO : ScriptableObject
 {
     [SerializeField] public BIOM PrevBiom;
     [SerializeField] public BIOM NextBiom;
-    [SerializeField] public string Name;
+    [SerializeField] public string Title;
     [SerializeField, TextArea] public string Description;
-    [SerializeField] public Sprite Image;
+    [SerializeField] public Sprite Preview;
 }

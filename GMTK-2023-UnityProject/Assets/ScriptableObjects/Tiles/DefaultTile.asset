@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4f3c718c3f1404a88f4a2ba8da8503, type: 3}
   m_Name: DefaultTile
   m_EditorClassIdentifier: 
-  Biom: 1
-  Name: Default Grassland
+  PrevBiom: 1
+  NextBiom: 1
+  Title: SomeTitle
   Description: This description might be a bit longer, not quite sure how long is
     too long, but as long as its long enough it should be long enough. As long its
     not a lonlong.
-  Image: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  Preview: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}

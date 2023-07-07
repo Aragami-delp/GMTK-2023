@@ -5,6 +5,7 @@ using UnityEngine;
 public enum BIOM
 {
     NONE = 0,
-    GRASSLAND,
+    WOODS,
     CAVE,
+    CITY,
 }
