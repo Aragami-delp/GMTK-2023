@@ -4,9 +4,24 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+
+    public static PlayerMovement Instance { get; private set; }
+
+    private void Awake()
+    {
+        #region Singleton
+        if (Instance)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        Instance = this;
+        #endregion
+    }
+
     public bool IsMoving { get; set; }
 
-    public void MovePlayer(float moveTime) 
+    public void MovePlayer() 
     {
         IsMoving = true;
         Debug.Log("Start moving");

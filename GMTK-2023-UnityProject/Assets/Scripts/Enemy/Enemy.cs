@@ -24,6 +24,8 @@ public class Enemy : MonoBehaviour
     {
         lvl = (int)(TileManager.Instance.PassedTiles * 1.5f / 10) + PlayerStats.Instance.Lvl + UnityEngine.Random.Range(-5, 5);
 
+        lvl =  Math.Clamp(lvl, 1, int.MaxValue);
+
         health = baseHealth + lvl * healthScaleFactor;
 
         Attack = baseAttack + lvl * dmgScaleFactor;

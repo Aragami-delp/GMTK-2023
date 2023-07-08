@@ -53,7 +53,7 @@ public class PlayerStats : MonoBehaviour
     {
         hp += healAmount;
 
-        Math.Clamp(hp, 0, MaxHp);
+        hp = Math.Clamp(hp, 0, MaxHp);
     }
 
     public void DamagePlayer(int damageAmount)

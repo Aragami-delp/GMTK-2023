@@ -26,5 +26,6 @@ public class TileButton : MonoBehaviour
     {
         TileManager.Instance.OnButtonNewTilePressed(this.m_so);
         this.gameObject.SetActive(false);
+        PlayerMovement.Instance.MovePlayer();
     }
 }
