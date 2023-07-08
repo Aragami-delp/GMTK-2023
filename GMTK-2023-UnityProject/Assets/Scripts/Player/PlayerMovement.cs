@@ -21,6 +21,10 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsMoving { get; set; }
 
+    [SerializeField]
+    [Range(1,2)]
+    private float movespeed;
+
     public void MovePlayer() 
     {
         IsMoving = true;
@@ -31,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (IsMoving) 
         {
-            transform.position += new Vector3(-1, 0, 0) * Time.deltaTime;
+            transform.position += new Vector3(movespeed  * -1 , 0, 0) * Time.deltaTime;
         }
     }
 
