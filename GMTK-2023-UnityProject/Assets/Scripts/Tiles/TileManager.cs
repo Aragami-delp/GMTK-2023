@@ -61,10 +61,10 @@ public class TileManager : MonoBehaviour
         return newTileButton;
     }
 
-    public void OnButtonNewTilePressed(MapTileSO _so)
+    public void OnButtonNewTilePressed(MapTileSO _so, int _chosenInteraction)
     {
         PassedTiles++;
-        PlaceNextFullTile(_so);
+        PlaceNextFullTile(_so, _chosenInteraction);
         RemoveCurrentButtons();
     }
 
@@ -158,10 +158,10 @@ public class TileManager : MonoBehaviour
         }
     }
 
-    private void PlaceNextFullTile(MapTileSO _so)
+    private void PlaceNextFullTile(MapTileSO _so, int _chosenInteraction)
     {
         PlaceNewEmptyTile();
-        m_activeTiles.ElementAt(GetActiveTilePosition).SetTile(_so);
+        m_activeTiles.ElementAt(GetActiveTilePosition).SetTile(_so, _chosenInteraction);
         //TODO: Start
     }
 
