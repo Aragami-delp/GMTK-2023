@@ -9,12 +9,19 @@ public class Item : MonoBehaviour
     private ItemData itemData;
     public ItemData ItemData { get { return itemData; } set { InitPrefab(value); } }
 
-    private void InitPrefab(ItemData data)
+    public void InitPrefab(ItemData data)
     {
+        itemData = data;
+
+        Debug.Log("New data id: " + data.ItemID);
+        Debug.Log("New data type: " + data.ItemType);
+
         itemID = data.ItemID;
+        itemID = ItemList.HealingPotion;
         itemType = data.ItemType;
-        //itemValue = some calc. Idk ask me later 
-        //changeAmount = data.ChangeAmount
+        itemType = ItemType.Armor;
+        itemValue = data.ItemValue;
+        changeAmount = data.ChangeAmount;
     }
 
     [SerializeField]
@@ -38,5 +45,8 @@ public class Item : MonoBehaviour
     {
         int levelScaled = 2 * level;
         changeAmount += levelScaled + (int) UnityEngine.Random.Range(-levelScaled * 0.25f , levelScaled * 0.25f);
+
+        itemValue = changeAmount;
+
     }
 }

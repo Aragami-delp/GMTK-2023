@@ -28,6 +28,7 @@ public class ItemData: ScriptableObject
 
 public enum ItemList 
 { 
+    Nothing,
     HealingPotion,
     Sword,
     Speer,
@@ -35,7 +36,8 @@ public enum ItemList
 }
 
 public enum ItemType 
-{ 
+{
+    Nothing,
     Potion,
     Weapon,
     Armor

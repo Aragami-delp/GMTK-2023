@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     private AnimationCurve damageFalloff;
     public int Lvl { get { return lvl; } set { lvl = value; } }
     [SerializeField]
-    private int baseHealth,healthScaleFactor,maxHelath;
+    private int baseHealth,healthScaleFactor, maxHealth;
 
     [SerializeField]
     private int health;
@@ -23,28 +23,35 @@ public class Enemy : MonoBehaviour
 
     public int Attack { get { return attack; } set { attack = value; } }
 
-    void Start()
+    void Awake()
     {
         lvl = (int)(TileManager.Instance.PassedTiles * 1.5f / 10) + PlayerStats.Instance.Lvl + UnityEngine.Random.Range(-5, 5);
 
-        lvl =  Math.Clamp(lvl, 1, int.MaxValue);
+        lvl =  Math.Clamp(lvl, 3 , int.MaxValue);
 
         health = baseHealth + lvl * healthScaleFactor;
 
         Attack = baseAttack + lvl * dmgScaleFactor;
         maxDmg = Attack;
-        maxHelath = health;
+        maxHealth = health;
     }
 
-public void DamageEnemy(int dmgAmount) 
+    public void DamageEnemy(int dmgAmount) 
     {
-        health -= dmgAmount;
+        Health -= dmgAmount;
 
-        Attack = (int) damageFalloff.Evaluate(health / maxHelath);
+        Attack =  (int) (maxDmg *  (float) damageFalloff.Evaluate((float) health / maxHealth));
+
     }
 
     private void SetHealth(int healthAmount) 
     {
         health = healthAmount;
+
+        if (health <= 0) 
+        {
+            health = 0;
+            Debug.Log("EnemyDed!!!!!!!!");
+        }
     }
 }

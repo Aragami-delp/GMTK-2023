@@ -32,9 +32,12 @@ public class ItemManager : MonoBehaviour
             {
                 GameObject newItem = GameObject.Instantiate(blankItemPrefab);
                 newItem.GetComponent<Item>().ItemData = itemList[i];
+
+                Debug.Log("Generated Item " + newItem.GetComponent<Item>().ItemID);
                 return newItem;
             }
         }
+
         Debug.LogWarning("Something went wrong on ItemCreation");
         return null;
     }
@@ -43,6 +46,10 @@ public class ItemManager : MonoBehaviour
     {
         GameObject newItem = GameObject.Instantiate(blankItemPrefab);
         newItem.GetComponent<Item>().ItemData = item;
+
+        Debug.Log("Generated Item From data " + item);
+        Debug.Log("scuffffed " + item.ItemType);
+
         return newItem;
     }
 

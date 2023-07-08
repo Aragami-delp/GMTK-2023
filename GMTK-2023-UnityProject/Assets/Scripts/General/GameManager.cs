@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        Instance = this;
+        Instance = this; 
     }
 
     public void EndGame()

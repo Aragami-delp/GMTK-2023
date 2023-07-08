@@ -49,7 +49,8 @@ public class FightManager : MonoBehaviour
             EndFight();
         }
 
-        Enemy enemy = Instantiate(enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Count)]);
+        var test = GameObject.Instantiate(enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Count)]);
+        Enemy enemy = test.GetComponent<Enemy>();
         PlayerStats player = PlayerStats.Instance;
 
         while(enemy.Health > 0 && player.HP > 0)
@@ -61,10 +62,6 @@ public class FightManager : MonoBehaviour
         if (player.HP > 0) 
         {
             RewardPlayer(enemy);
-        }
-        else
-        {
-            GameManager.Instance.EndGame();
         }
 
     }
@@ -81,8 +78,12 @@ public class FightManager : MonoBehaviour
         }
         Array.Sort(randomIndex);
         rewardItem = RewardItems[randomIndex[0]];
-        
-        PlayerStats.Instance.GiveItem(ItemManager.Instance.CreateItem(rewardItem));
+
+        GameObject generatedItem = ItemManager.Instance.CreateItem(rewardItem);
+        generatedItem.GetComponent<Item>().InitPrefab(rewardItem);
+        generatedItem.GetComponent<Item>().LevelItem(enemy.Lvl);
+
+        PlayerStats.Instance.GiveItem(generatedItem);
         PlayerStats.Instance.GainXP(100 + UnityEngine.Random.Range(0,25) * enemy.Lvl);
 
         EndFight();
