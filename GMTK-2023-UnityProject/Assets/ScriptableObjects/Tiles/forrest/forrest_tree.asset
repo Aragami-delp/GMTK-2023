@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4f3c718c3f1404a88f4a2ba8da8503, type: 3}
   m_Name: forrest_tree
   m_EditorClassIdentifier: 
-  PrevBiom: 0
-  NextBiom: 0
-  Title: 
+  PrevBiom: 1
+  NextBiom: 1
+  Title: forrest_tree
   Description: 
-  Foreground: {fileID: 0}
-  Background: {fileID: 0}
+  Foreground: {fileID: 21300000, guid: d4a41fdba698beb4db83a54b5a63adae, type: 3}
+  Background: {fileID: 21300000, guid: 2864a92d9d35c80459108984bda6a300, type: 3}

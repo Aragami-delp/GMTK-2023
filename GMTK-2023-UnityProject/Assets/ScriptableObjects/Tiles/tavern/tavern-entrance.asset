@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4f3c718c3f1404a88f4a2ba8da8503, type: 3}
   m_Name: tavern-entrance
   m_EditorClassIdentifier: 
-  PrevBiom: 0
-  NextBiom: 0
-  Title: 
+  PrevBiom: 3
+  NextBiom: 4
+  Title: tavern-entrance
   Description: 
-  Foreground: {fileID: 0}
-  Background: {fileID: 0}
+  Foreground: {fileID: 21300000, guid: 80574bbfd6fc0c1418759410b28114bb, type: 3}
+  Background: {fileID: 21300000, guid: 253b82dc50c0e24458ad6ddd180c48df, type: 3}

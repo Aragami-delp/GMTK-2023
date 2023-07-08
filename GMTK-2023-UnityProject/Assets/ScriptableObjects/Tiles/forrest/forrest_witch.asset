@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4f3c718c3f1404a88f4a2ba8da8503, type: 3}
   m_Name: forrest_witch
   m_EditorClassIdentifier: 
-  PrevBiom: 0
-  NextBiom: 0
-  Title: 
+  PrevBiom: 1
+  NextBiom: 1
+  Title: forrest_witch
   Description: 
-  Foreground: {fileID: 0}
-  Background: {fileID: 0}
+  Foreground: {fileID: 21300000, guid: 5337ca621d71fe84ebd80d2a43a3ca28, type: 3}
+  Background: {fileID: 21300000, guid: 7c5f61861409ad64a96931ab372f0ae1, type: 3}

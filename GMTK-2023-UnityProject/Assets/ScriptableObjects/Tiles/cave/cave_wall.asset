@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4f3c718c3f1404a88f4a2ba8da8503, type: 3}
   m_Name: cave_wall
   m_EditorClassIdentifier: 
-  PrevBiom: 0
-  NextBiom: 0
-  Title: 
+  PrevBiom: 2
+  NextBiom: 2
+  Title: cave_wall
   Description: 
-  Foreground: {fileID: 0}
-  Background: {fileID: 0}
+  Foreground: {fileID: 21300000, guid: 4076ea497b23bb642a8a2048c9fe4df0, type: 3}
+  Background: {fileID: 21300000, guid: 59314ea4f03b422478cf37cc4bdf0d6e, type: 3}
