@@ -49,7 +49,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3e49bc8813544024fad97d75d78f086b, type: 2}
   - {fileID: 11400000, guid: 832c9e1ac5febcd439ea90b84de09270, type: 2}
   m_tileButtonPrefab: {fileID: 7473963821099860972, guid: ef94efa3f87d9654dab3df98377a1312, type: 3}
-  m_tileWorldPrefab: {fileID: 987538821476046588, guid: 032770bcd52825244897e122ebc4e401, type: 3}
+  m_tileWorldPrefab: {fileID: 1136465431456167112, guid: 032770bcd52825244897e122ebc4e401, type: 3}
   m_buttonCount: 3
   m_minTilesInSameBiom: 4
   m_buttonParent: {fileID: 0}
@@ -58,4 +58,4 @@ MonoBehaviour:
   m_emptyTileForeground: {fileID: 0}
   m_emptyTileBackground: {fileID: 21300000, guid: 6b1b9df510d68d24fba5e5cb680838d4, type: 3}
   m_tileWorldParent: {fileID: 0}
-  m_newTileDistance: 0
+  m_newTileDistance: 2.8

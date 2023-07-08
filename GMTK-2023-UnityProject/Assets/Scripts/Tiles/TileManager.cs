@@ -132,10 +132,10 @@ public class TileManager : MonoBehaviour
     private void PlaceNewEmptyTile()
     {
         TileWorld newEmptyTile = GetNewTileWorld();
-        //foreach (TileWorld tileWorld in m_activeTiles)
-        //{
-        //    //tileWorld.transform.position = new Vector3(tileWorld.transform.position.x + m_newTileDistance, tileWorld.transform.position.y, tileWorld.transform.position.z - 1); // Player moves, not the world
-        //}
+        foreach (TileWorld tileWorld in m_activeTiles)
+        {
+            tileWorld.transform.position = new Vector3(tileWorld.transform.position.x, tileWorld.transform.position.y, tileWorld.transform.position.z - 0.01f); // Player moves, not the world
+        }
         if (newEmptyTile != null)
         {
             newEmptyTile.gameObject.SetActive(true);
