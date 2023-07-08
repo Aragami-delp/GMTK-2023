@@ -1,20 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TileInWorld : MonoBehaviour
 {
     private MapTileSO m_so;
-    [SerializeField] private Image m_previewImage;
+    [SerializeField] private Image m_foreground;
+    [SerializeField] private Image m_background;
 
-    public TileInWorld InitNewTile(MapTileSO _so)
+    public TileInWorld Init(MapTileSO _so)
     {
         m_so = _so;
-        m_previewImage.sprite = m_so.Preview;
+        m_foreground.sprite = m_so.Foreground;
+        m_background.sprite = m_so.Background;
         return this;
     }
-
-    public Sprite WorldSprite => m_so.Preview;
 }

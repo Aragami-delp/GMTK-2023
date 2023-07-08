@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc4f3c718c3f1404a88f4a2ba8da8503, type: 3}
-  m_Name: DefaultTile
+  m_Name: DefaultTile 2
   m_EditorClassIdentifier: 
   PrevBiom: 1
   NextBiom: 1
-  Title: FirstTitle
+  Title: ThirdTitle
   Description: This description might be a bit longer, not quite sure how long is
     too long, but as long as its long enough it should be long enough. As long its
     not a lonlong.

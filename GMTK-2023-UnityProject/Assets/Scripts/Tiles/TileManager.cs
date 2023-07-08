@@ -7,15 +7,12 @@ using UnityEngine.UI;
 
 public class TileManager : MonoBehaviour
 {
-    public static TileManager Instance = null;
-    [SerializeField] private TileButton m_mapTilePrefab;
-    private List<Sprite> m_prevTileInWorldList = new List<Sprite>();
-    [SerializeField] private TileInWorld m_currentTile;
-    [SerializeField] private int m_prevTilesDisplayed = 3;
-    [SerializeField] private RectTransform m_buttonsHolder;
-    [SerializeField] private Image m_currentWorldTileImage;
+    public static TileManager Instance;
 
-    [SerializeField, InspectorName("SO Map Tiles")] private List<MapTileSO> m_mapTileSOs = new List<MapTileSO>();
+    public int PassedTiles { get; private set; } = 0;
+
+
+    [SerializeField, InspectorName("Map Tile SOs")] private List<MapTileSO> m_mapTileScriptables;
 
     private void Awake()
     {
@@ -29,37 +26,78 @@ public class TileManager : MonoBehaviour
         #endregion
     }
 
-    private void Start()
-    {
-        AddNewRandomTileButton(BIOM.WOODS);
-    }
+    #region TileButton
+    [SerializeField] private int m_buttonCount = 3;
+    [SerializeField] private int m_minTilesInSameBiom = 4;
+    [SerializeField] private RectTransform m_buttonParent;
 
-    public void AddNewRandomTileButton(BIOM _prevBiom)
+    [Header("Pooling"), SerializeField] private TileButton m_tileButtonPrefab;
+    private List<TileButton> m_poolTileButton = new List<TileButton>();
+    private List<TileButton> m_currentlyActiveButtons = new List<TileButton>();
+    private TileButton GetNewTileButton()
     {
-        List<MapTileSO> matchingTiles = m_mapTileSOs.Where(o => o.PrevBiom == _prevBiom).ToList();
-        TileButton newTileButton = Instantiate(m_mapTilePrefab).Init(matchingTiles[Random.Range(0, matchingTiles.Count)]);
-        newTileButton.transform.SetParent(m_buttonsHolder, false);
-    }
-
-    public void AddTileToWorld(MapTileSO m_so)
-    {
-        CycleTiles(m_currentTile);
-        Instantiate(m_mapTilePrefab).Init(m_so);
-    }
-
-    public void GenerateNewTileChoices()
-    {
-
-    }
-
-    private void CycleTiles(TileInWorld _newOldTile)
-    {
-        List<Sprite> newOrder = new List<Sprite> { _newOldTile.WorldSprite };
-        for (int i = 1; i < m_prevTilesDisplayed; i++)
+        for (int i = 0; i < m_poolTileButton.Count; i++)
         {
-            newOrder.Add(m_prevTileInWorldList[i]);
+            if (!m_poolTileButton[i].gameObject.activeInHierarchy)
+            {
+                return m_poolTileButton[i];
+            }
         }
-        m_prevTileInWorldList = newOrder;
-        //TODO: Update visible images
+
+        TileButton newTileButton = Instantiate(m_tileButtonPrefab);
+        newTileButton.transform.SetParent(this.transform, false);
+        newTileButton.gameObject.SetActive(false);
+        m_poolTileButton.Add(newTileButton);
+        return newTileButton;
     }
+
+    public void OnButtonNewTilePressed(MapTileSO _mapTileSO)
+    {
+        PassedTiles++;
+        Debug.Log("Clicked on button: " + _mapTileSO.Title);
+        RemoveCurrentButtons();
+    }
+
+    [ContextMenu("GenerateButtons"), System.Obsolete("Only use for inspector calls", false)]
+    private void InspectorCreateNewButtons()
+    {
+        CreateNewButtons(BIOM.WOODS);
+    }
+    private void CreateNewButtons(BIOM _prevBiom, bool _biomChangeAllowed = true)
+    {
+        List<MapTileSO> newPossibleTiles = m_mapTileScriptables.Where(o => o.PrevBiom == _prevBiom && (m_minTilesInSameBiom > 0 ? o.NextBiom == _prevBiom : true)).ToList();
+        m_minTilesInSameBiom--;
+        for (int i = 0; i < m_buttonCount; i++)
+        {
+            MapTileSO newSO = newPossibleTiles[Random.Range(0, newPossibleTiles.Count)];
+            newPossibleTiles.Remove(newSO);
+            TileButton newButton = GetNewTileButton();
+            if (newButton != null)
+            {
+                newButton.gameObject.SetActive(true);
+                newButton.Init(newSO);
+                newButton.transform.SetParent(m_buttonParent, false);
+                m_currentlyActiveButtons.Add(newButton);
+            }
+        }
+    }
+
+    private void RemoveCurrentButtons()
+    {
+        foreach (TileButton oldButton in m_currentlyActiveButtons)
+        {
+            oldButton.gameObject.SetActive(false);
+            oldButton.transform.SetParent(this.transform, false);
+        }
+    }
+    #endregion
+
+    #region PlaceTiles
+
+    [SerializeField] private int m_visiblePrevTilesCount = 10;
+    //private List
+
+    //private void 
+
+    #endregion
 }

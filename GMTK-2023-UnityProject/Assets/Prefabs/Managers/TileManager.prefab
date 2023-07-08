@@ -44,6 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ae1ae06507cd38439929ad8ea827d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_mapTilePrefab: {fileID: 7473963821099860972, guid: ef94efa3f87d9654dab3df98377a1312, type: 3}
-  m_mapTileSOs:
+  m_buttonCount: 3
+  m_buttonParent: {fileID: 0}
+  m_poolTileButtonSize: 5
+  m_tileButtonPrefab: {fileID: 7473963821099860972, guid: ef94efa3f87d9654dab3df98377a1312, type: 3}
+  m_mapTileScriptables:
+  - {fileID: 11400000, guid: 5b2b4cef5e8396a47a71bc5d6b7910f2, type: 2}
+  - {fileID: 11400000, guid: 3e49bc8813544024fad97d75d78f086b, type: 2}
   - {fileID: 11400000, guid: 832c9e1ac5febcd439ea90b84de09270, type: 2}
