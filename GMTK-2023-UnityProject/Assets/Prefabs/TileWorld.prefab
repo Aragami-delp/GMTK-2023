@@ -306,7 +306,7 @@ Transform:
   - {fileID: 5510085605216087576}
   - {fileID: 8117656143118580807}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1136465431456167112
 MonoBehaviour:
@@ -322,3 +322,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_foreground: {fileID: 8778173928186028186}
   m_background: {fileID: 3862774020073354519}
+  m_tileCollider: {fileID: 8154759119828097081}
