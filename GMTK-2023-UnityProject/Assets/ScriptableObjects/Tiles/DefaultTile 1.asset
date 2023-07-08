@@ -20,3 +20,4 @@ MonoBehaviour:
     not a lonlong.
   Foreground: {fileID: 21300000, guid: eabb02c77d11a8344ba27d24b6241084, type: 3}
   Background: {fileID: 21300000, guid: 7b57cfdd98b6ce243b79e427859c71f5, type: 3}
+  Event: 1

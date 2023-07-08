@@ -18,4 +18,9 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
     }
+
+    public void EndGame()
+    {
+        Debug.LogWarning("Player died, game ends!!!!!!");
+    }
 }

@@ -25,6 +25,7 @@ public class TileEventManager : MonoBehaviour
             case EVENTTYPE.FIGHT:
                 //TODO: Start fight + UI
                 Debug.Log("Start FIGHT event");
+                FightManager.Instance.StartFight(TileManager.Instance.GetCurrentTile().CurrentBiom);
                 break;
             case EVENTTYPE.LOOT:
                 //TODO: Item system give loot + UI

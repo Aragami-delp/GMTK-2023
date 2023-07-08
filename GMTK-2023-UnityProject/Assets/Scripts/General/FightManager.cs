@@ -4,8 +4,27 @@ using UnityEngine;
 
 public class FightManager : MonoBehaviour
 {
+    [System.Serializable]
+    public class EnemyPair
+    {
+        [SerializeField] public BIOM EnemyType;
+        [SerializeField] public Enemy EnemyPrefab;
+    }
+
+    private List<Enemy> GetPossibleEnemyPrefabs(BIOM _biom)
+    {
+        List<Enemy> retPrefabs = new List<Enemy>();
+        foreach (EnemyPair pair in m_enemyPairList)
+        {
+            if (pair.EnemyType == _biom)
+                retPrefabs.Add(pair.EnemyPrefab);
+        }
+        return retPrefabs;
+    }
+
     [SerializeField]
     private List<ItemData> RewardItems = new List<ItemData>();
+    [SerializeField] private List<EnemyPair> m_enemyPairList = new List<EnemyPair>();
 
     public static FightManager Instance { get; private set; }
     private void Awake()
@@ -21,8 +40,16 @@ public class FightManager : MonoBehaviour
     }
 
 
-    public void StartFight(Enemy enemy) 
+    public void StartFight(BIOM _enemyBiom)
     {
+        List<Enemy> enemyPrefabs = GetPossibleEnemyPrefabs(_enemyBiom);
+        if (enemyPrefabs.Count == 0)
+        {
+            Debug.LogError("No enemy to spawn, ending fight");
+            EndFight();
+        }
+
+        Enemy enemy = Instantiate(enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Count)]);
         PlayerStats player = PlayerStats.Instance;
 
         while(enemy.Health > 0 && player.HP > 0)
@@ -34,6 +61,10 @@ public class FightManager : MonoBehaviour
         if (player.HP > 0) 
         {
             RewardPlayer(enemy);
+        }
+        else
+        {
+            GameManager.Instance.EndGame();
         }
 
     }
@@ -54,5 +85,11 @@ public class FightManager : MonoBehaviour
         PlayerStats.Instance.GiveItem(ItemManager.Instance.CreateItem(rewardItem));
         PlayerStats.Instance.GainXP(100 + UnityEngine.Random.Range(0,25) * enemy.Lvl);
 
+        EndFight();
+    }
+
+    private void EndFight()
+    {
+        TileEventManager.Instance.EndEvent();
     }
 }

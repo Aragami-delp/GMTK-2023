@@ -26,6 +26,7 @@ public class TileManager : MonoBehaviour
         }
         Instance = this;
         #endregion
+        m_prevTilesInSameBiom = m_minTilesInSameBiom;
 
         AwakeWorldTile();
         CreateNewButtons();
@@ -40,6 +41,7 @@ public class TileManager : MonoBehaviour
     #region TileButton
     [Header("Button"), SerializeField] private int m_buttonCount = 3;
     [SerializeField] private int m_minTilesInSameBiom = 4;
+    private int m_prevTilesInSameBiom;
     [SerializeField] private RectTransform m_buttonParent;
 
     private TileButton GetNewTileButton()
@@ -71,10 +73,12 @@ public class TileManager : MonoBehaviour
     {
         BIOM prevBiom = GetCurrentTile().NextBiom;
         List<MapTileSO> newPossibleTiles = m_mapTileScriptables.Where(o => o.PrevBiom == prevBiom && (m_minTilesInSameBiom > 0 ? o.NextBiom == prevBiom : true)).ToList();
-        m_minTilesInSameBiom--;
+        m_prevTilesInSameBiom--;
         for (int i = 0; i < m_buttonCount; i++)
         {
             MapTileSO newSO = newPossibleTiles[Random.Range(0, newPossibleTiles.Count)];
+            if (newSO.NextBiom != prevBiom)
+                m_prevTilesInSameBiom = m_minTilesInSameBiom;
             newPossibleTiles.Remove(newSO);
             TileButton newButton = GetNewTileButton();
             if (newButton != null)

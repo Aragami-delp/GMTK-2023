@@ -18,3 +18,4 @@ MonoBehaviour:
   Description: 
   Foreground: {fileID: 21300000, guid: 491f3a4fa25ba2d49b37c27ff4d2834c, type: 3}
   Background: {fileID: 21300000, guid: 452c84b424edf284faf4be039fb6b635, type: 3}
+  Event: 1
