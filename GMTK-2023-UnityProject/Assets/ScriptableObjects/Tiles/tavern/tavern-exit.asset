@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4f3c718c3f1404a88f4a2ba8da8503, type: 3}
   m_Name: tavern-exit
   m_EditorClassIdentifier: 
-  PrevBiom: 0
-  NextBiom: 0
-  Title: 
+  PrevBiom: 4
+  NextBiom: 3
+  Title: tavern-exit
   Description: 
-  Foreground: {fileID: 0}
-  Background: {fileID: 0}
+  Foreground: {fileID: 21300000, guid: aecc890bafef8f74faff3735458c6e65, type: 3}
+  Background: {fileID: 21300000, guid: 6833a2cbd8479d34eba07d87096f5874, type: 3}

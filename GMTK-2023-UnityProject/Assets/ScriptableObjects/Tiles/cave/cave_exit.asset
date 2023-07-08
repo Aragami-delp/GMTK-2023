@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4f3c718c3f1404a88f4a2ba8da8503, type: 3}
   m_Name: cave_exit
   m_EditorClassIdentifier: 
-  PrevBiom: 0
-  NextBiom: 0
+  PrevBiom: 2
+  NextBiom: 1
   Title: cave_exit
   Description: 
   Foreground: {fileID: 21300000, guid: 1c1d21d62cb32194da768913271237cf, type: 3}
