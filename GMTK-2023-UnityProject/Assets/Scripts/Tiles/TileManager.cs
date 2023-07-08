@@ -4,6 +4,7 @@ using UnityEngine;
 using Helper;
 using System.Linq;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class TileManager : MonoBehaviour
 {
@@ -24,16 +25,21 @@ public class TileManager : MonoBehaviour
         }
         Instance = this;
         #endregion
-    }
 
-    #region TileButton
-    [SerializeField] private int m_buttonCount = 3;
-    [SerializeField] private int m_minTilesInSameBiom = 4;
-    [SerializeField] private RectTransform m_buttonParent;
+        AwakeWorldTile();
+    }
 
     [Header("Pooling"), SerializeField] private TileButton m_tileButtonPrefab;
     private List<TileButton> m_poolTileButton = new List<TileButton>();
     private List<TileButton> m_currentlyActiveButtons = new List<TileButton>();
+    [SerializeField] private TileWorld m_tileWorldPrefab;
+    private List<TileWorld> m_poolTileWorld = new List<TileWorld>();
+
+    #region TileButton
+    [Header("Button"), SerializeField] private int m_buttonCount = 3;
+    [SerializeField] private int m_minTilesInSameBiom = 4;
+    [SerializeField] private RectTransform m_buttonParent;
+
     private TileButton GetNewTileButton()
     {
         for (int i = 0; i < m_poolTileButton.Count; i++)
@@ -51,21 +57,18 @@ public class TileManager : MonoBehaviour
         return newTileButton;
     }
 
-    public void OnButtonNewTilePressed(MapTileSO _mapTileSO)
+    public void OnButtonNewTilePressed(MapTileSO _so)
     {
         PassedTiles++;
-        Debug.Log("Clicked on button: " + _mapTileSO.Title);
+        PlaceNextFullTile(_so);
         RemoveCurrentButtons();
     }
 
     [ContextMenu("GenerateButtons"), System.Obsolete("Only use for inspector calls", false)]
-    private void InspectorCreateNewButtons()
+    public void CreateNewButtons()
     {
-        CreateNewButtons(BIOM.WOODS);
-    }
-    private void CreateNewButtons(BIOM _prevBiom, bool _biomChangeAllowed = true)
-    {
-        List<MapTileSO> newPossibleTiles = m_mapTileScriptables.Where(o => o.PrevBiom == _prevBiom && (m_minTilesInSameBiom > 0 ? o.NextBiom == _prevBiom : true)).ToList();
+        BIOM prevBiom = GetCurrentTile().NextBiom;
+        List<MapTileSO> newPossibleTiles = m_mapTileScriptables.Where(o => o.PrevBiom == prevBiom && (m_minTilesInSameBiom > 0 ? o.NextBiom == prevBiom : true)).ToList();
         m_minTilesInSameBiom--;
         for (int i = 0; i < m_buttonCount; i++)
         {
@@ -94,10 +97,85 @@ public class TileManager : MonoBehaviour
 
     #region PlaceTiles
 
-    [SerializeField] private int m_visiblePrevTilesCount = 10;
-    //private List
+    [Header("TileWorld"), SerializeField] private int m_visiblePrevTilesCount = 5;
+    [SerializeField] private int m_visibleNextTilesCount = 5;
+    [SerializeField] private Sprite m_emptyTileForeground;
+    [SerializeField] private Sprite m_emptyTileBackground;
+    [SerializeField] private Transform m_tileWorldParent;
+    [SerializeField] private float m_newTileDistance = 3;
+    private int GetActiveTilePosition => m_visiblePrevTilesCount;
+    private int GetActiveTotalTiles => GetActiveTilePosition + m_visibleNextTilesCount;
 
-    //private void 
+    private LinkedList<TileWorld> m_activeTiles = new LinkedList<TileWorld>();
 
+    private TileWorld GetNewTileWorld()
+    {
+        for (int i = 0; i < m_poolTileWorld.Count; i++)
+        {
+            if (!m_poolTileWorld[i].gameObject.activeInHierarchy)
+            {
+                return m_poolTileWorld[i];
+            }
+        }
+
+        TileWorld newTileWorld = Instantiate(m_tileWorldPrefab);
+        newTileWorld.transform.SetParent(this.transform, false);
+        newTileWorld.gameObject.SetActive(false);
+        m_poolTileWorld.Add(newTileWorld);
+        return newTileWorld;
+    }
+
+    private int m_drawnTiles;
+
+    private void PlaceNewEmptyTile()
+    {
+        TileWorld newEmptyTile = GetNewTileWorld();
+        //foreach (TileWorld tileWorld in m_activeTiles)
+        //{
+        //    //tileWorld.transform.position = new Vector3(tileWorld.transform.position.x + m_newTileDistance, tileWorld.transform.position.y, tileWorld.transform.position.z - 1); // Player moves, not the world
+        //}
+        if (newEmptyTile != null)
+        {
+            newEmptyTile.gameObject.SetActive(true);
+            newEmptyTile.InitEmptyTile(m_emptyTileForeground, m_emptyTileBackground);
+            newEmptyTile.transform.SetParent(m_tileWorldParent, false);
+            newEmptyTile.transform.position = m_tileWorldParent.position - new Vector3(m_newTileDistance * m_drawnTiles++ - (m_visiblePrevTilesCount * m_newTileDistance), 0, 0);
+            m_activeTiles.AddFirst(newEmptyTile);
+        }
+
+        if (m_activeTiles.Count > GetActiveTotalTiles)
+        {
+            TileWorld x = m_activeTiles.Last();
+            x.gameObject.SetActive(false);
+            m_activeTiles.RemoveLast();
+        }
+    }
+
+    private void PlaceNextFullTile(MapTileSO _so)
+    {
+        PlaceNewEmptyTile();
+        m_activeTiles.ElementAt(GetActiveTilePosition).SetTile(_so);
+    }
+
+    private void AwakeWorldTile()
+    {
+        for (int i = 0; i < GetActiveTotalTiles; i++)
+        {
+            PlaceNewEmptyTile();
+        }
+    }
+
+    public TileWorld GetCurrentTile()
+    {
+        return m_activeTiles.ElementAt(GetActiveTilePosition);
+    }
     #endregion
+
+#if UNITY_EDITOR
+    [ContextMenu("Print current Biom"), System.Obsolete("Only use for inspector calls", false)]
+    public void PrintCurrentBiom()
+    {
+        Debug.Log(GetCurrentTile().CurrentBiom.ToString());
+    }
+#endif
 }
