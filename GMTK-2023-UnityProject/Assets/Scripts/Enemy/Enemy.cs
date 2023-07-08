@@ -6,9 +6,12 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField]
     private int lvl;
+
+    [SerializeField]
+    private AnimationCurve damageFalloff;
     public int Lvl { get { return lvl; } set { lvl = value; } }
     [SerializeField]
-    private int baseHealth,healthScaleFactor;
+    private int baseHealth,healthScaleFactor,maxHelath;
 
     [SerializeField]
     private int health;
@@ -16,7 +19,7 @@ public class Enemy : MonoBehaviour
     public int Health { get { return health; } set { SetHealth(value); } }
 
     [SerializeField]
-    private int attack,baseAttack,dmgScaleFactor;
+    private int attack,baseAttack,dmgScaleFactor,maxDmg;
 
     public int Attack { get { return attack; } set { attack = value; } }
 
@@ -29,13 +32,15 @@ public class Enemy : MonoBehaviour
         health = baseHealth + lvl * healthScaleFactor;
 
         Attack = baseAttack + lvl * dmgScaleFactor;
-
+        maxDmg = Attack;
+        maxHelath = health;
     }
 
-
-    public void DamageEnemy(int dmgAmount) 
+public void DamageEnemy(int dmgAmount) 
     {
         health -= dmgAmount;
+
+        Attack = (int) damageFalloff.Evaluate(health / maxHelath);
     }
 
     private void SetHealth(int healthAmount) 
