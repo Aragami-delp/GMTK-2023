@@ -9,10 +9,12 @@ public class TileInWorld : MonoBehaviour
     private MapTileSO m_so;
     [SerializeField] private Image m_previewImage;
 
-    public TileInWorld Init(MapTileSO _so)
+    public TileInWorld InitNewTile(MapTileSO _so)
     {
         m_so = _so;
         m_previewImage.sprite = m_so.Preview;
         return this;
     }
+
+    public Sprite WorldSprite => m_so.Preview;
 }

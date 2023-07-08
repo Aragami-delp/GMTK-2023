@@ -9,8 +9,7 @@ public class TestSpawnButton : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.D))
         {
-            TileButton x = TileManager.Instance.GetNewRandomMapTile(BIOM.WOODS);
-            x.transform.SetParent(m_parent, false);
+            
         }
     }
 }
