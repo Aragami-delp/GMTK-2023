@@ -23,4 +23,24 @@ public class TileWorld : MonoBehaviour
         m_background.sprite = _so.Background;
         return this;
     }
+
+    public BIOM NextBiom
+    {
+        get
+        {
+            if (m_so != null && m_so.NextBiom != BIOM.NONE)
+                return m_so.NextBiom;
+            return BIOM.WOODS;
+        }
+    }
+
+    public BIOM CurrentBiom
+    {
+        get
+        {
+            if (m_so != null)
+                return m_so.PrevBiom;
+            return BIOM.NONE;
+        }
+    }
 }

@@ -65,13 +65,10 @@ public class TileManager : MonoBehaviour
     }
 
     [ContextMenu("GenerateButtons"), System.Obsolete("Only use for inspector calls", false)]
-    public void InspectorCreateNewButtons()
+    public void CreateNewButtons()
     {
-        CreateNewButtons(BIOM.WOODS);
-    }
-    private void CreateNewButtons(BIOM _prevBiom)
-    {
-        List<MapTileSO> newPossibleTiles = m_mapTileScriptables.Where(o => o.PrevBiom == _prevBiom && (m_minTilesInSameBiom > 0 ? o.NextBiom == _prevBiom : true)).ToList();
+        BIOM prevBiom = GetCurrentTile().NextBiom;
+        List<MapTileSO> newPossibleTiles = m_mapTileScriptables.Where(o => o.PrevBiom == prevBiom && (m_minTilesInSameBiom > 0 ? o.NextBiom == prevBiom : true)).ToList();
         m_minTilesInSameBiom--;
         for (int i = 0; i < m_buttonCount; i++)
         {
@@ -173,4 +170,12 @@ public class TileManager : MonoBehaviour
         return m_activeTiles.ElementAt(GetActiveTilePosition);
     }
     #endregion
+
+#if UNITY_EDITOR
+    [ContextMenu("Print current Biom"), System.Obsolete("Only use for inspector calls", false)]
+    public void PrintCurrentBiom()
+    {
+        Debug.Log(GetCurrentTile().CurrentBiom.ToString());
+    }
+#endif
 }

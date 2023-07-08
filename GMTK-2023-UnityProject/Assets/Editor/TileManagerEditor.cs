@@ -13,7 +13,7 @@ public class TileManagerEditor : Editor
         TileManager myScript = (TileManager)target;
         if (Application.isPlaying && GUILayout.Button("Generate Buttons"))
         {
-            myScript.InspectorCreateNewButtons();
+            myScript.CreateNewButtons();
         }
     }
 }
