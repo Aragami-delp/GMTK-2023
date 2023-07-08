@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     [Range(1,2)]
-    private float movespeed;
+    private float movespeed = 1;
 
     public void MovePlayer() 
     {
@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
         IsMoving = false;
         if (_other.transform.parent.TryGetComponent<TileWorld>(out TileWorld _tileWorld))
         {
-            TileEventManager.Instance.StartEvent(_tileWorld.GetEvent);
+            TileEventManager.Instance.StartEvent(_tileWorld, _tileWorld.GetEvent);
         }
         Debug.Log("Stop moving");
     }

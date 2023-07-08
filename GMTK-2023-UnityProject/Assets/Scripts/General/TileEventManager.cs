@@ -18,9 +18,9 @@ public class TileEventManager : MonoBehaviour
         #endregion
     }
 
-    public void StartEvent(EVENTTYPE _type)
+    public void StartEvent(TileWorld _tileWorld, EVENTTYPE eventtype)
     {
-        switch (_type)
+        switch (eventtype)
         {
             case EVENTTYPE.FIGHT:
                 //TODO: Start fight + UI
@@ -35,9 +35,10 @@ public class TileEventManager : MonoBehaviour
                 //TODO: Player give health + UI
                 Debug.Log("Start REST event");
                 break;
-            case EVENTTYPE.NPC:
+            case EVENTTYPE.INTERACTION:
                 //TODO: Planed
-                Debug.Log("Start NPC event");
+                Debug.Log("Start INTERACTION event");
+                RunNpcAction(_tileWorld);
                 break;
             case EVENTTYPE.NONE:
             default:
@@ -51,5 +52,20 @@ public class TileEventManager : MonoBehaviour
     {
         Debug.Log("End event");
         TileManager.Instance.StartNextTileTurn();
+    }
+
+    private void RunNpcAction(TileWorld _tileWorld)
+    {
+        InteractionSO chosenNpcAction = _tileWorld.GetTileSo().interactions[_tileWorld.GetTileSo().getChosenInteraction()];
+
+        if (chosenNpcAction.PlayerReactions.Length != 0)
+        {
+            return;
+        }
+
+        PlayerReactionSO playerReactionSo =
+            chosenNpcAction.PlayerReactions[UnityEngine.Random.Range(0, chosenNpcAction.PlayerReactions.Length)];
+        
+        StartEvent(_tileWorld, playerReactionSo.Eventtype);
     }
 }

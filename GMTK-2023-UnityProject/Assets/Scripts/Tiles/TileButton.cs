@@ -17,8 +17,8 @@ public class TileButton : MonoBehaviour
         m_so = _so;
         m_foreground.sprite = m_so.Foreground;
         m_background.sprite = m_so.Background;
-        m_title.SetText(m_so.Title);
-        m_description.SetText(m_so.Description);
+        m_title.SetText(m_so.getTitle());
+        m_description.SetText(m_so.getDescription());
         return this;
     }
 

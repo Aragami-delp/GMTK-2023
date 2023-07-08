@@ -8,5 +8,5 @@ public enum EVENTTYPE
     FIGHT,
     LOOT,
     REST,
-    NPC,
+    INTERACTION,
 }

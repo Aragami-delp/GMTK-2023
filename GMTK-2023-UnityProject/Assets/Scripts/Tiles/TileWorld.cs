@@ -54,4 +54,9 @@ public class TileWorld : MonoBehaviour
             return BIOM.NONE;
         }
     }
+
+    public MapTileSO GetTileSo()
+    {
+        return m_so;
+    }
 }
