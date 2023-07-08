@@ -7,5 +7,6 @@ public enum BIOM
     NONE = 0,
     WOODS,
     CAVE,
-    CITY,
+    ROAD,
+    TAVERN,
 }

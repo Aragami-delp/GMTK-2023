@@ -45,9 +45,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_mapTileScriptables:
-  - {fileID: 11400000, guid: 5b2b4cef5e8396a47a71bc5d6b7910f2, type: 2}
-  - {fileID: 11400000, guid: 3e49bc8813544024fad97d75d78f086b, type: 2}
-  - {fileID: 11400000, guid: 832c9e1ac5febcd439ea90b84de09270, type: 2}
+  - {fileID: 11400000, guid: f635643a600fd44429ffee8223b86aa8, type: 2}
+  - {fileID: 11400000, guid: 06a7d67c12f74eb4da653a527f6be336, type: 2}
+  - {fileID: 11400000, guid: af2e8c915a750c245800c1c7ab98fa92, type: 2}
+  - {fileID: 11400000, guid: d3a3ea4b68c2fdf48aa1ad23d277a9f9, type: 2}
+  - {fileID: 11400000, guid: 84a377a543340164387cff644db8f906, type: 2}
+  - {fileID: 11400000, guid: 632c14bb69b7b304487e1a0c8684302b, type: 2}
+  - {fileID: 11400000, guid: 1007c5c6f07bcd248bbe0022352b8ef7, type: 2}
+  - {fileID: 11400000, guid: ea1c5e571066ec441a74a3ef2013ffa2, type: 2}
+  - {fileID: 11400000, guid: 5a75547bf79a4bd49a0c08a47f3bcd55, type: 2}
+  - {fileID: 11400000, guid: 36b7b02b6a9480642b88325029560b19, type: 2}
+  - {fileID: 11400000, guid: 8110d468b1e67df4b9e94236d55692a8, type: 2}
+  - {fileID: 11400000, guid: 26e170b5190236d46837c828b5da0b27, type: 2}
+  - {fileID: 11400000, guid: 86da4d4b83e014a43a0417ae545624f6, type: 2}
+  - {fileID: 11400000, guid: f1c3de60bef258f4891d9abf1bfb0893, type: 2}
+  - {fileID: 11400000, guid: 793d30d26aa19914c8c33543853026f2, type: 2}
+  - {fileID: 11400000, guid: f833f2f95dfb8b04692b717909d9dc36, type: 2}
+  - {fileID: 11400000, guid: f8409de62ad2b254f9d65d34dca94284, type: 2}
+  - {fileID: 11400000, guid: 5a6b02f82833a974788dfaa7b953df87, type: 2}
+  - {fileID: 11400000, guid: c1ecc149612269845b910b59d4fe27bc, type: 2}
+  - {fileID: 11400000, guid: 28f6b0377bfefd6448fad4278144485e, type: 2}
   m_tileButtonPrefab: {fileID: 7473963821099860972, guid: ef94efa3f87d9654dab3df98377a1312, type: 3}
   m_tileWorldPrefab: {fileID: 1136465431456167112, guid: 032770bcd52825244897e122ebc4e401, type: 3}
   m_buttonCount: 3
