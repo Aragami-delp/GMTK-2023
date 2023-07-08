@@ -12,4 +12,6 @@ public class MapTileSO : ScriptableObject
     [SerializeField, TextArea] public string Description;
     [SerializeField] public Sprite Foreground;
     [SerializeField] public Sprite Background;
+
+    [SerializeField] public EVENTTYPE Event;
 }

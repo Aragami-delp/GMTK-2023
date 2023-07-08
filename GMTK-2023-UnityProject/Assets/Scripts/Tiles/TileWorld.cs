@@ -33,6 +33,8 @@ public class TileWorld : MonoBehaviour
         return this;
     }
 
+    public EVENTTYPE GetEvent => m_so.Event;
+
     public BIOM NextBiom
     {
         get

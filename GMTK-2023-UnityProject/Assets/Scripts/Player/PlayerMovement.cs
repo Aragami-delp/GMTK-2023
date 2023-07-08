@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -33,15 +34,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (IsMoving) 
+        if (IsMoving)
         {
             transform.position += new Vector3(movespeed  * -1 , 0, 0) * Time.deltaTime;
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D _other)
     {
         IsMoving = false;
+        if (_other.transform.parent.TryGetComponent<TileWorld>(out TileWorld _tileWorld))
+        {
+            TileEventManager.Instance.StartEvent(_tileWorld.GetEvent);
+        }
         Debug.Log("Stop moving");
     }
 
