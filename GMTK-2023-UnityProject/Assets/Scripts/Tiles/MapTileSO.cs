@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "New Tile Data", menuName = "Tiles/New Tile")]
+[CreateAssetMenu(fileName = "NewTileData", menuName = "Tiles/New Tile")]
 public class MapTileSO : ScriptableObject
 {
     [SerializeField] public BIOM PrevBiom;
     [SerializeField] public BIOM NextBiom;
     [SerializeField] public string Title;
     [SerializeField, TextArea] public string Description;
-    [SerializeField] public Sprite Preview;
+    [SerializeField] public Sprite Foreground;
+    [SerializeField] public Sprite Background;
 }

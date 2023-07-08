@@ -121,13 +121,13 @@ namespace Helper
     //    }
     //}
 
-    public class Helper : MonoBehaviour
-    {
-        [SerializeField] private Optional<float> m_target;
-        [SerializeField/*, ReadOnlyTick("Test")*/
-         #if UNITY_EDITOR
-         , ReadOnly
-        #endif
-        ] private float m_test = 1f;
-    }
+    //public class Helper : MonoBehaviour
+    //{
+    //    [SerializeField] private Optional<float> m_target;
+    //    [SerializeField/*, ReadOnlyTick("Test")*/
+    //     #if UNITY_EDITOR
+    //     , ReadOnly
+    //    #endif
+    //    ] private float m_test = 1f;
+    //}
 }
