@@ -5,6 +5,7 @@ using Helper;
 using System.Linq;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using UnityEngine.Events;
 
 public class TileManager : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class TileManager : MonoBehaviour
         #endregion
 
         AwakeWorldTile();
+        CreateNewButtons();
     }
 
     [Header("Pooling"), SerializeField] private TileButton m_tileButtonPrefab;
@@ -64,7 +66,7 @@ public class TileManager : MonoBehaviour
         RemoveCurrentButtons();
     }
 
-    [ContextMenu("GenerateButtons"), System.Obsolete("Only use for inspector calls", false)]
+    [ContextMenu("GenerateButtons")]
     public void CreateNewButtons()
     {
         BIOM prevBiom = GetCurrentTile().NextBiom;
@@ -155,6 +157,7 @@ public class TileManager : MonoBehaviour
     {
         PlaceNewEmptyTile();
         m_activeTiles.ElementAt(GetActiveTilePosition).SetTile(_so);
+        //TODO: Start
     }
 
     private void AwakeWorldTile()
@@ -171,6 +174,7 @@ public class TileManager : MonoBehaviour
     }
     #endregion
 
+    #region Debug
 #if UNITY_EDITOR
     [ContextMenu("Print current Biom"), System.Obsolete("Only use for inspector calls", false)]
     public void PrintCurrentBiom()
@@ -178,4 +182,10 @@ public class TileManager : MonoBehaviour
         Debug.Log(GetCurrentTile().CurrentBiom.ToString());
     }
 #endif
+    #endregion
+
+    public void StartNextTileTurn()
+    {
+        CreateNewButtons();
+    }
 }
