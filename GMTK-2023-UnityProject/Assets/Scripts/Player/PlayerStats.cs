@@ -21,6 +21,13 @@ public class PlayerStats : MonoBehaviour
     private void OnEnable()
     {
         Inventory = new GameObject[inventorySpace];
+
+        for (int i = 0; i < Inventory.Length; i++)
+        {
+            Inventory[i] = ItemManager.Instance.CreateItem(ItemList.Nothing);
+        }
+
+        Attack = baseAttack;
     }
 
     #region Helath stuff
@@ -32,6 +39,7 @@ public class PlayerStats : MonoBehaviour
     private int maxHp = 100;
     public int MaxHp { get { return maxHp; } set { maxHp = value; } }
 
+    public EventHandler OnchangingHp;
     public EventHandler OnDying;
 
     private void OnChangingHP(int newHP)
@@ -45,20 +53,22 @@ public class PlayerStats : MonoBehaviour
         else
         {
             hp = newHP;
+            OnchangingHp?.Invoke(this, EventArgs.Empty);
         }
 
     }
 
     public void HealPlayer(int healAmount)
     {
-        hp += healAmount;
+        HP += healAmount;
 
-        hp = Math.Clamp(hp, 0, MaxHp);
+        HP = Math.Clamp(hp, 0, MaxHp);
     }
 
     public void DamagePlayer(int damageAmount)
     {
-        hp -= damageAmount;
+        HP -= damageAmount;
+        HP = Math.Clamp(hp, 0, MaxHp);
     }
 
     #endregion
@@ -95,7 +105,7 @@ public class PlayerStats : MonoBehaviour
 
 
     [SerializeField]
-    private int xpForLevel;
+    private int xpForLevel = 100;
     public int XPForLevel { get { return xpForLevel; } set { xpForLevel = value; } }
 
     #endregion
@@ -107,7 +117,16 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField]
     private int attack;
-    public int Attack { get { return attack; } set { attack = value; } }
+    public int Attack { get { return attack; } set { OnChangingAttack(value); } }
+
+    private void OnChangingAttack(int newAttack)
+    {
+        attack = newAttack;
+        OnAttackChange?.Invoke(this,EventArgs.Empty);
+
+    }
+
+    public EventHandler OnAttackChange;
     #endregion
 
     #region inventoryStuff
@@ -121,8 +140,11 @@ public class PlayerStats : MonoBehaviour
 
     private void OnWeaponHandChange(GameObject newItem)
     {
-        attack -= weaponHand.GetComponent<Item>().ChangeAmount;
-        TryReplaceInventoryItem(weaponHand);
+        if (WeaponHand != null)
+        {
+            attack -= weaponHand.GetComponent<Item>().ChangeAmount;
+            TryReplaceInventoryItem(weaponHand);
+        }
         weaponHand = newItem;
 
         attack += weaponHand.GetComponent<Item>().ChangeAmount;
@@ -134,13 +156,15 @@ public class PlayerStats : MonoBehaviour
 
     private void OnBodyItemChange(GameObject newItem)
     {
-        if (BodyItem.GetComponent<Item>().ItemType == ItemType.Armor) 
+        if (BodyItem != null)
         {
-            maxHp -= GetComponent<Item>().ChangeAmount;
+            if (BodyItem.GetComponent<Item>().ItemType == ItemType.Armor)
+            {
+                maxHp -= GetComponent<Item>().ChangeAmount;
+            }
+
+            TryReplaceInventoryItem(BodyItem);
         }
-
-        TryReplaceInventoryItem(BodyItem);
-
         BodyItem = newItem;
 
         if (BodyItem.GetComponent<Item>().ItemType == ItemType.Armor) 

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3222976b259615c4baaea42bd29cd5b6, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  itemID: 0
-  itemType: 1
+  itemID: 2
+  itemType: 2
   itemValue: 5
   changeAmount: 78

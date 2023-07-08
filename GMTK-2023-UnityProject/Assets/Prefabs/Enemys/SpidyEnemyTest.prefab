@@ -140,11 +140,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  baseHealth: 10
+  baseHealth: 50
   healthScaleFactor: 1
-  maxHelath: 10
-  health: 10
-  attack: 10
+  maxHealth: 0
+  health: 0
+  attack: 0
   baseAttack: 10
   dmgScaleFactor: 1
   maxDmg: 10
