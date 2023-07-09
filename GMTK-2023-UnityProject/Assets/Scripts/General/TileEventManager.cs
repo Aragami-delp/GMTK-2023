@@ -30,10 +30,12 @@ public class TileEventManager : MonoBehaviour
             case EVENTTYPE.LOOT:
                 //TODO: Item system give loot + UI
                 Debug.Log("Start LOOT event");
+                EndEvent();
                 break;
             case EVENTTYPE.REST:
                 //TODO: Player give health + UI
                 Debug.Log("Start REST event");
+                EndEvent();
                 break;
             case EVENTTYPE.INTERACTION:
                 //TODO: Planed
@@ -56,16 +58,18 @@ public class TileEventManager : MonoBehaviour
 
     private void RunNpcAction(TileWorld _tileWorld)
     {
-        InteractionSO chosenNpcAction = _tileWorld.GetTileSo().interactions[_tileWorld.GetTileSo().getChosenInteraction()];
+        InteractionSO chosenNpcAction = _tileWorld.GetTileSo().interactions[_tileWorld.getChosenInteraction()];
 
-        if (chosenNpcAction.PlayerReactions.Length != 0)
+        if (chosenNpcAction.PlayerReactions.Length == 0)
         {
+            EndEvent();
             return;
         }
 
         PlayerReactionSO playerReactionSo =
             chosenNpcAction.PlayerReactions[UnityEngine.Random.Range(0, chosenNpcAction.PlayerReactions.Length)];
         
+        Debug.Log(playerReactionSo.Description);
         StartEvent(_tileWorld, playerReactionSo.Eventtype);
     }
 }

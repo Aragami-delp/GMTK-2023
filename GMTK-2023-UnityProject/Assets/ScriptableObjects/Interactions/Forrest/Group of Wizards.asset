@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 231f6d61cb704b008ce3c2a63c5fda2d, type: 3}
+  m_Name: Group of Wizards
+  m_EditorClassIdentifier: 
+  Title: Group of Wizards
+  Description: A group of wizards are studying a book near a campfire. They seem
+    upset and disheartened.
+  PlayerReactions:
+  - {fileID: 11400000, guid: efce6e380d6c1d14dafffe0a2f5c0dc9, type: 2}

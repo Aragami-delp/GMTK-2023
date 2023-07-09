@@ -18,25 +18,23 @@ public class MapTileSO : ScriptableObject
     [SerializeField] public EVENTTYPE Event;
     [SerializeField] public InteractionSO[] interactions;
     
-    private int chosenInteraction = -1;
-
-    public int getChosenInteraction()
+    public String getTitle(int chosenInteraction)
     {
-        if (chosenInteraction == -1 && Event == EVENTTYPE.INTERACTION && interactions.Length != 0)
+        string txt = Title;
+        if (chosenInteraction != -1)
         {
-            chosenInteraction = UnityEngine.Random.Range(0, interactions.Length);
+            txt = interactions[chosenInteraction].Title;
         }
-
-        return chosenInteraction;
+        return txt;
     }
 
-    public String getTitle()
+    public String getDescription(int chosenInteraction)
     {
-        return getChosenInteraction() == -1 ? Title : interactions[chosenInteraction].Title;
-    }
-
-    public String getDescription()
-    {
-        return getChosenInteraction() == -1 ? Description : interactions[chosenInteraction].Description;
+        string txt = Description;
+        if (chosenInteraction != -1)
+        {
+            txt = interactions[chosenInteraction].Description;
+        }
+        return txt;
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class TileWorld : MonoBehaviour
 {
     private MapTileSO m_so;
+    private int m_chosenInteraction;
     [SerializeField] private SpriteRenderer m_foreground;
     [SerializeField] private SpriteRenderer m_background;
     [SerializeField] private Collider2D m_tileCollider;
@@ -18,12 +19,14 @@ public class TileWorld : MonoBehaviour
         return this;
     }
 
-    public TileWorld SetTile(MapTileSO _so)
+    public TileWorld SetTile(MapTileSO _so, int _chosenInteraction)
     {
         m_so = _so;
         m_foreground.sprite = _so.Foreground;
         m_background.sprite = _so.Background;
         m_tileCollider.enabled = true;
+        m_chosenInteraction = _chosenInteraction;
+        
         return this;
     }
 
@@ -58,5 +61,10 @@ public class TileWorld : MonoBehaviour
     public MapTileSO GetTileSo()
     {
         return m_so;
+    }
+
+    public int getChosenInteraction()
+    {
+        return m_chosenInteraction;
     }
 }
