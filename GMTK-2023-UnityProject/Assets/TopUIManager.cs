@@ -7,24 +7,34 @@ using UnityEngine.UI;
 public class TopUIManager : MonoBehaviour
 {
     [SerializeField]
-    private Slider hpSlider;
+    private Slider hpSlider,xpSlider;
     PlayerStats playerstats;
 
     [SerializeField]
-    private ParticleSystem bleedParticels,HealParticels;
+    private ParticleSystem bleedParticels,HealParticels,XpGainParticels;
 
     int oldHP;
+    int oldXp;
     bool updateHealth;
     bool gainedHP;
+    bool updateXP;
+
     private void Start()
     {
         playerstats = PlayerStats.Instance;
 
         // 0 to play Heal particel stuff
         UpdateHealthBar(this, 0);
-
+        playerstats.OnchangingXP += UpdateXpBar;
         playerstats.OnchangingHp += UpdateHealthBar;
         playerstats.OnAttackChange += UpdateDamageText;
+    }
+
+    private void UpdateXpBar(object sender, int oldXP)
+    {
+        oldXp = oldXP;
+        updateXP = true;
+        StartCoroutine(XpParticels());
     }
 
     private void UpdateHealthBar(object sender, int oldHP)
@@ -47,19 +57,26 @@ public class TopUIManager : MonoBehaviour
     {
         
     }
-    float time = 0;
+    float timeHP = 0;
+    float timeXp = 0;
     private void Update()
     {
+        if (updateXP) 
+        {
+            timeXp += Time.deltaTime;
+
+            xpSlider.value = Mathf.Lerp(oldXp, playerstats.XP, timeXp) / playerstats.XPForLevel;
+        }
         if (updateHealth)
         {
-            time += Time.deltaTime;
+            timeHP += Time.deltaTime;
             if (gainedHP)
             {
-                hpSlider.value = Mathf.Lerp(oldHP, playerstats.HP , time) / playerstats.MaxHp;
+                hpSlider.value = Mathf.Lerp(oldHP, playerstats.HP , timeHP) / playerstats.MaxHp;
             }
             else 
             {
-                hpSlider.value = Mathf.Lerp(oldHP, playerstats.HP, time) / playerstats.MaxHp;
+                hpSlider.value = Mathf.Lerp(oldHP, playerstats.HP, timeHP) / playerstats.MaxHp;
             }
             
         }
@@ -83,6 +100,15 @@ public class TopUIManager : MonoBehaviour
 
 
         updateHealth = false;
-        time = 0;
+        timeHP = 0;
+    }
+
+    IEnumerator XpParticels() 
+    {
+        XpGainParticels.Play();
+        yield return new WaitForSeconds(1);
+        XpGainParticels.Stop();
+        updateXP = false;
+        timeXp = 0;
     }
 }

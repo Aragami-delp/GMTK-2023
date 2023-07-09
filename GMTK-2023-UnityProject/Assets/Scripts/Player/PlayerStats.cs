@@ -93,7 +93,9 @@ public class PlayerStats : MonoBehaviour
     #region level
     [SerializeField]
     private int lvl = 1;
-    public int Lvl { get; set; }
+    public int Lvl { get { return lvl; } set { lvl = value; OnLevelUp?.Invoke(this, EventArgs.Empty); } }
+    public EventHandler OnLevelUp;
+
     #endregion
 
     #region Xp stuff
@@ -101,13 +103,17 @@ public class PlayerStats : MonoBehaviour
     private int xp;
     public int XP { get { return xp; } set { OnGainingXp(value); } }
 
+    public event EventHandler<int> OnchangingXP;
     private void OnGainingXp(int newXp)
     {
-        XP = newXp;
+        int oldxp = XP;
+        xp = newXp;
 
-        if (XP >= XPForLevel)
+        OnchangingXP?.Invoke(this, oldxp);
+
+        if (xp >= XPForLevel)
         {
-            XP -= XPForLevel;
+            xp -= XPForLevel;
             Lvl++;
             Debug.Log("Wow Level up :D");
 
@@ -117,7 +123,7 @@ public class PlayerStats : MonoBehaviour
 
     public void GainXP(int xpAmount)
     {
-        xp += xpAmount;
+        XP += xpAmount;
     }
 
 
