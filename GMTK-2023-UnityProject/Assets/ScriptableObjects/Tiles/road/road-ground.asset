@@ -16,5 +16,7 @@ MonoBehaviour:
   NextBiom: 3
   Title: road-ground
   Description: 
-  Foreground: {fileID: 0}
+  Foreground: {fileID: 21300000, guid: d4d9465ad1e2a9041a356e7efc2d2d50, type: 3}
   Background: {fileID: 21300000, guid: 13027a6569bfa4a41a83bcd22dd32eff, type: 3}
+  Event: 0
+  interactions: []

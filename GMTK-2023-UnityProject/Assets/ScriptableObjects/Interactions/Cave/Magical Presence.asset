@@ -10,10 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 231f6d61cb704b008ce3c2a63c5fda2d, type: 3}
-  m_Name: Walk though forrest
+  m_Name: Magical Presence
   m_EditorClassIdentifier: 
-  Title: Nothing happens
-  Description: You walk through the forrest and see nothing eventfull
-  PlayerReactions:
-  - {fileID: 11400000, guid: ccb21cb1a588e2640aa425e95683d97c, type: 2}
-  - {fileID: 11400000, guid: 5f348906184c11949a3f694b88152a13, type: 2}
+  Title: Magical presence
+  Description: You sense a powerful magical presence in a nearby cave.
+  PlayerReactions: []

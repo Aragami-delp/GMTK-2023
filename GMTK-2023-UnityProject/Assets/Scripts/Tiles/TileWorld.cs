@@ -44,7 +44,7 @@ public class TileWorld : MonoBehaviour
         {
             if (m_so != null && m_so.NextBiom != BIOM.NONE)
                 return m_so.NextBiom;
-            return BIOM.WOODS;
+            return BIOM.TAVERN;
         }
     }
 
@@ -54,7 +54,7 @@ public class TileWorld : MonoBehaviour
         {
             if (m_so != null)
                 return m_so.PrevBiom;
-            return BIOM.NONE;
+            return BIOM.TAVERN;
         }
     }
 

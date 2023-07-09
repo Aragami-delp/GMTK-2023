@@ -56,7 +56,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ea1c5e571066ec441a74a3ef2013ffa2, type: 2}
   - {fileID: 11400000, guid: 5a75547bf79a4bd49a0c08a47f3bcd55, type: 2}
   - {fileID: 11400000, guid: 36b7b02b6a9480642b88325029560b19, type: 2}
-  - {fileID: 11400000, guid: 8110d468b1e67df4b9e94236d55692a8, type: 2}
   - {fileID: 11400000, guid: 26e170b5190236d46837c828b5da0b27, type: 2}
   - {fileID: 11400000, guid: 86da4d4b83e014a43a0417ae545624f6, type: 2}
   - {fileID: 11400000, guid: f1c3de60bef258f4891d9abf1bfb0893, type: 2}
@@ -64,7 +63,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f833f2f95dfb8b04692b717909d9dc36, type: 2}
   - {fileID: 11400000, guid: f8409de62ad2b254f9d65d34dca94284, type: 2}
   - {fileID: 11400000, guid: 5a6b02f82833a974788dfaa7b953df87, type: 2}
-  - {fileID: 11400000, guid: c1ecc149612269845b910b59d4fe27bc, type: 2}
   - {fileID: 11400000, guid: 28f6b0377bfefd6448fad4278144485e, type: 2}
   m_tileButtonPrefab: {fileID: 7473963821099860972, guid: ef94efa3f87d9654dab3df98377a1312, type: 3}
   m_tileWorldPrefab: {fileID: 1136465431456167112, guid: 032770bcd52825244897e122ebc4e401, type: 3}

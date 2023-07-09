@@ -16,5 +16,7 @@ MonoBehaviour:
   NextBiom: 4
   Title: tavern-bar
   Description: 
-  Foreground: {fileID: 0}
+  Foreground: {fileID: 21300000, guid: d4d9465ad1e2a9041a356e7efc2d2d50, type: 3}
   Background: {fileID: 21300000, guid: b857b7ee84a424e438ffdc6029b2067c, type: 3}
+  Event: 0
+  interactions: []

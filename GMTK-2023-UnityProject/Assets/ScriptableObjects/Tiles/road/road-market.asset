@@ -16,5 +16,7 @@ MonoBehaviour:
   NextBiom: 3
   Title: road-market
   Description: 
-  Foreground: {fileID: 0}
+  Foreground: {fileID: 21300000, guid: d4d9465ad1e2a9041a356e7efc2d2d50, type: 3}
   Background: {fileID: 21300000, guid: de96d664a11c61941aef1ffd9864c6ec, type: 3}
+  Event: 0
+  interactions: []

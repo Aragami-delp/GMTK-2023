@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 231f6d61cb704b008ce3c2a63c5fda2d, type: 3}
   m_Name: ForretClear
   m_EditorClassIdentifier: 
-  Title: You see a deer grazing on some grass
+  Title: You see a deer
   Description: Up ahead, the forest path clears. You see a deer grazing on some grass.
     It turns and sees you before fleeing.
   PlayerReactions:

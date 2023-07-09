@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 231f6d61cb704b008ce3c2a63c5fda2d, type: 3}
   m_Name: Big Brid
   m_EditorClassIdentifier: 
-  Title: A big fly over your head
+  Title: A big brid appears
   Description: A loud noise in the forest canopy overhead startles you. You see a
     large bird (raven or eagle) quickly fly away.
   PlayerReactions:
