@@ -72,7 +72,7 @@ public class TileManager : MonoBehaviour
     public void CreateNewButtons()
     {
         BIOM prevBiom = GetCurrentTile().NextBiom;
-        List<MapTileSO> newPossibleTiles = m_mapTileScriptables.Where(o => o.PrevBiom == prevBiom && (m_minTilesInSameBiom > 0 ? o.NextBiom == prevBiom : true)).ToList();
+        List<MapTileSO> newPossibleTiles = m_mapTileScriptables.Where(o => o.PrevBiom == prevBiom && (m_prevTilesInSameBiom > 0 ? o.NextBiom == prevBiom : true)).ToList();
         m_prevTilesInSameBiom--;
         for (int i = 0; i < m_buttonCount; i++)
         {
