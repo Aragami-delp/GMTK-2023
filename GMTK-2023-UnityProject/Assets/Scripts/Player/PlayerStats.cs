@@ -117,7 +117,7 @@ public class PlayerStats : MonoBehaviour
             Lvl++;
             Debug.Log("Wow Level up :D");
 
-            XPForLevel += 200 * Lvl; 
+            XPForLevel += 130 * Lvl; 
         }
     }
 
