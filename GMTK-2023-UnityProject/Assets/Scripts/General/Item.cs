@@ -13,13 +13,8 @@ public class Item : MonoBehaviour
     {
         itemData = data;
 
-        Debug.Log("New data id: " + data.ItemID);
-        Debug.Log("New data type: " + data.ItemType);
-
         itemID = data.ItemID;
-        itemID = ItemList.HealingPotion;
         itemType = data.ItemType;
-        itemType = ItemType.Armor;
         itemValue = data.ItemValue;
         changeAmount = data.ChangeAmount;
     }

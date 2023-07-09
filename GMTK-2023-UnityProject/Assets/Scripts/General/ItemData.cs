@@ -7,11 +7,11 @@ public class ItemData: ScriptableObject
 {
     [SerializeField]
     private ItemList itemID;
-    public ItemList ItemID { get; set; }
+    public ItemList ItemID { get { return itemID; } set { itemID = value; } }
     
     [SerializeField]
     private ItemType itemType;
-    public ItemType ItemType { get; set; }
+    public ItemType ItemType { get { return itemType; } set { itemType = value; } }
 
 
     [SerializeField]

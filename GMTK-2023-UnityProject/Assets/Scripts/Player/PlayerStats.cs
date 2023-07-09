@@ -27,6 +27,8 @@ public class PlayerStats : MonoBehaviour
             Inventory[i] = ItemManager.Instance.CreateItem(ItemList.Nothing);
         }
 
+        XPForLevel = 100;
+
         Attack = baseAttack;
     }
 
@@ -39,7 +41,7 @@ public class PlayerStats : MonoBehaviour
     private int maxHp = 100;
     public int MaxHp { get { return maxHp; } set { maxHp = value; } }
 
-    public EventHandler OnchangingHp;
+    public event EventHandler<int> OnchangingHp;
     public EventHandler OnDying;
 
     private void OnChangingHP(int newHP)
@@ -52,23 +54,38 @@ public class PlayerStats : MonoBehaviour
         }
         else
         {
+            int oltHP = hp;
             hp = newHP;
-            OnchangingHp?.Invoke(this, EventArgs.Empty);
+            OnchangingHp?.Invoke(this, oltHP);
         }
 
     }
 
     public void HealPlayer(int healAmount)
     {
-        HP += healAmount;
+        if (HP + healAmount > maxHp)
+        {
+            HP = maxHp;
+        }
+        else 
+        {
+            HP += healAmount;
+        }
+            
 
-        HP = Math.Clamp(hp, 0, MaxHp);
+       
     }
 
     public void DamagePlayer(int damageAmount)
     {
-        HP -= damageAmount;
-        HP = Math.Clamp(hp, 0, MaxHp);
+        if (HP - damageAmount < 0)
+        {
+            HP = 0;
+        }
+        else
+        {
+            HP -= damageAmount;
+        }
     }
 
     #endregion
@@ -91,7 +108,7 @@ public class PlayerStats : MonoBehaviour
         if (XP >= XPForLevel)
         {
             XP -= XPForLevel;
-            lvl++;
+            Lvl++;
             Debug.Log("Wow Level up :D");
 
             XPForLevel += 200 * Lvl; 
@@ -163,9 +180,10 @@ public class PlayerStats : MonoBehaviour
                 maxHp -= GetComponent<Item>().ChangeAmount;
             }
 
-            TryReplaceInventoryItem(BodyItem);
+            TryReplaceInventoryItem(bodyItem);
         }
-        BodyItem = newItem;
+
+        bodyItem = newItem;
 
         if (BodyItem.GetComponent<Item>().ItemType == ItemType.Armor) 
         {
@@ -230,14 +248,22 @@ public class PlayerStats : MonoBehaviour
         Item item = GameObjectNewItem.GetComponent<Item>();
         if (item.ItemType == ItemType.Weapon)
         {
-            if (weaponHand.GetComponent<Item>().ItemValue <= item.ItemValue)
+            if (weaponHand == null && item.ItemType == ItemType.Weapon) 
+            {
+                weaponHand = GameObjectNewItem;
+            }
+            else if (weaponHand.GetComponent<Item>().ItemValue <= item.ItemValue)
             {
                 weaponHand = GameObjectNewItem;
             }
         }
         else if (item.ItemType == ItemType.Armor)
         {
-            if (BodyItem.GetComponent<Item>().ItemValue <= item.ItemValue)
+            if (BodyItem == null && item.ItemType == ItemType.Armor) 
+            {
+                BodyItem = GameObjectNewItem;
+            }
+            else if (BodyItem.GetComponent<Item>().ItemValue <= item.ItemValue)
             {
                 BodyItem = GameObjectNewItem;
             }

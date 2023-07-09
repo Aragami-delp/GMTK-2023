@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,21 +50,30 @@ public class FightManager : MonoBehaviour
             EndFight();
         }
 
-        var test = GameObject.Instantiate(enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Count)]);
-        Enemy enemy = test.GetComponent<Enemy>();
+        Enemy enemy = Instantiate(enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Count)],TileManager.Instance.GetCurrentTile().transform.position + new Vector3(0,-1,-0.3f),Quaternion.identity);
+
+
         PlayerStats player = PlayerStats.Instance;
 
-        while(enemy.Health > 0 && player.HP > 0)
+        StartCoroutine(FightCoroutine(enemy,player));
+
+    }
+
+    IEnumerator FightCoroutine(Enemy enemy,PlayerStats player) 
+    {
+        while (enemy.Health > 0 && player.HP > 0)
         {
             enemy.DamageEnemy(player.Attack);
             player.DamagePlayer(enemy.Attack);
+            yield return new WaitForSeconds(1.2f);
         }
 
-        if (player.HP > 0) 
+        if (player.HP > 0)
         {
             RewardPlayer(enemy);
         }
 
+        GameObject.Destroy(enemy.gameObject);
     }
 
     public void RewardPlayer(Enemy enemy) 
